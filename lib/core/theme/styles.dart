@@ -14,4 +14,9 @@ class AppTextStyles {
     fontWeight: FontWeightHelper.regular,
     color: AppColor.gray,
   );
+  static TextStyle font17WhiteMedium = TextStyle(
+    fontSize: 17.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: AppColor.white,
+  );
 }
