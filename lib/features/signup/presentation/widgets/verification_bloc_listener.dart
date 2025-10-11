@@ -30,6 +30,7 @@ class VerificationBlocListener extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(' $data'), backgroundColor: Colors.green),
             );
+             context.pushNamed(Routes.loginScreen);
             break;
           case VerificationError(errorMessage: final errorMessage):
             ScaffoldMessenger.of(context).showSnackBar(
@@ -38,7 +39,6 @@ class VerificationBlocListener extends StatelessWidget {
                 backgroundColor: Colors.red,
               ),
             );
-             context.pushNamed(Routes.loginScreen);
             break;
 
           default:

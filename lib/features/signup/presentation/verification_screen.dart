@@ -17,29 +17,32 @@ class VerificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomeAppBar(hasWishlistIcon: false),
-              30.verticalSpace,
-              Image.asset(
-                AppImages.verificationImage,
-                width: 225.w,
-                height: 166.h,
-              ),
-              30.verticalSpace,
-              PinPutOTP(),
-              60.verticalSpace,
-              CustomElevationButton(
-                onPressed: () {
-                  context.read<VerificationCubit>().emitVerificationStates(
-                    email: email ?? '',
-                  );
-                },
-                label: 'Confirm Code',
-              ),
-              VerificationBlocListener(),
-            ],
+        child: Padding(
+          padding: EdgeInsets.all(16.0.w),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomeAppBar(hasWishlistIcon: false),
+                30.verticalSpace,
+                Image.asset(
+                  AppImages.verificationImage,
+                  width: 225.w,
+                  height: 166.h,
+                ),
+                30.verticalSpace,
+                PinPutOTP(),
+                60.verticalSpace,
+                CustomElevationButton(
+                  onPressed: () {
+                    context.read<VerificationCubit>().emitVerificationStates(
+                      email: email ?? '',
+                    );
+                  },
+                  label: 'Confirm Code',
+                ),
+                VerificationBlocListener(),
+              ],
+            ),
           ),
         ),
       ),

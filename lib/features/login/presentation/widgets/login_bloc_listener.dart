@@ -27,7 +27,7 @@ class LoginBlocListener extends StatelessWidget {
               ),
             );
           case LoginSuccess():
-            context.pop();
+    
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('login Successful!'),
@@ -38,7 +38,6 @@ class LoginBlocListener extends StatelessWidget {
             context.pushNamed(Routes.homeScreen);
             break;
           case LoginError(errorMessage: final errorMessage):
-            context.pop();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(errorMessage ?? 'An unknown error occurred.'),

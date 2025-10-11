@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:laza_app/core/networking/api_result.dart';
+import 'package:laza_app/core/networking/dio_factory.dart';
 import 'package:laza_app/features/login/data/models/login_request_body.dart';
 import 'package:laza_app/features/login/data/repos/login_repo_impl.dart';
 
@@ -26,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
     loginResponse.when(
       success: (loginResponse) {
         saveUserToken(
-          token: loginResponse.token,
+          token: loginResponse.accessToken,
           refreshToken: loginResponse.refreshToken,
         );
         return emit(LoginSuccess(data: loginResponse));
@@ -44,5 +45,6 @@ class LoginCubit extends Cubit<LoginState> {
       key: Constants.refreshToken,
       value: refreshToken ?? '',
     );
+    DioFactory.sendTokenAfterLoggedIn(token);
   }
 }
