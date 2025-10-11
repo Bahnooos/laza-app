@@ -1,0 +1,54 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:laza_app/core/networking/api_result.dart';
+import 'package:laza_app/features/home/presentation/logic/cubit/home_state.dart';
+
+import '../../../data/models/products_model.dart';
+import '../../../data/repos/home_repo_impl.dart';
+
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit(this._homeRepoImpl) : super(HomeInitial());
+  final HomeRepoImpl _homeRepoImpl;
+
+  int page = 1;
+  final int pageSize = 10;
+  final List<ProductItem> _allProducts = [];
+
+  Future<void> emitCategoriesState() async {
+    emit(HomeLoading());
+    final categoriesResponse = await _homeRepoImpl.getCategories();
+    categoriesResponse.when(
+      success: (categories) => emit(HomeCategoriesSuccess(categories)),
+      failure: (error) =>
+          emit(HomeCategoriesError(errorMessage: error.message)),
+    );
+  }
+
+  Future<void> emitProductsStates() async {
+    final currentState = state;
+    if (currentState is HomeProductsSuccess && currentState.hasReachedMax) {
+      return;
+    }
+    if (page == 1) {
+      emit(HomeLoading());
+    }
+    final response = await _homeRepoImpl.getProducts(
+      page: page,
+      pageSize: pageSize,
+    );
+    response.when(
+      success: (newProducts) {
+        final bool hasReachedMax = newProducts.isEmpty;
+        _allProducts.addAll(newProducts);
+        page++;
+        emit(
+          HomeProductsSuccess(
+            data: List.from(_allProducts),
+            hasReachedMax: hasReachedMax,
+          ),
+        );
+      },
+      failure: (errorMessage) =>
+          emit(HomeProductsError(errorMessage: errorMessage.message)),
+    );
+  }
+}

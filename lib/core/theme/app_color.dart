@@ -10,4 +10,5 @@ class AppColor {
   static const Color ghostWhite = Color(0xFFF5F6FA);
 
   static const Color white = Color(0xFFFFFFFF);
+  static const Color backGroundScreenColor = Color(0xFFFEFEFE);
 }

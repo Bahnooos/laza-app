@@ -28,39 +28,28 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
-  # for handling networking request
   dio: ^5.9.0
-  pretty_dio_logger: ^1.4.0
   flutter:
     sdk: flutter
- 
-  # To handle state management by bloc
   flutter_bloc: ^9.1.1
-
-  # Customize Flutter's default white native splash screen with background color and splash image
   flutter_native_splash: ^2.4.6
-
-  # for adapting screen and font size.Guaranteed to look good on different models
   flutter_screenutil: ^5.9.3
-
-  # to create an SVG rendering widget from an asset
+  flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.2.1
-
-  # To handle dependency injection
+  freezed: ^3.2.3
+  freezed_annotation: ^3.1.0
   get_it: ^8.2.0
-
-  # Automatically generate code for converting to and from JSON by annotating Dart classes.
-  json_serializable: ^6.11.1
   json_annotation: ^4.9.0
-
-  # Retrofit.dart is an dio client generator
+  json_serializable: ^6.11.1
+  pinput: ^5.0.2
+  pretty_dio_logger: ^1.4.0
   retrofit: ^4.7.3
   retrofit_generator: ^10.0.6
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
- 
-  # A build system for Dart code generation
   build_runner: ^2.9.0
   flutter_lints: ^5.0.0
   flutter_test:
