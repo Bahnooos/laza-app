@@ -10,11 +10,12 @@ class HomeCubit extends Cubit<HomeState> {
   final HomeRepoImpl _homeRepoImpl;
 
   int page = 1;
-  final int pageSize = 10;
+  int pageSize = 10;
   final List<ProductItem> _allProducts = [];
+  bool hasMore = true;
 
   Future<void> emitCategoriesState() async {
-    emit(HomeLoading());
+    emit(HomeCategoriesLoading());
     final categoriesResponse = await _homeRepoImpl.getCategories();
     categoriesResponse.when(
       success: (categories) => emit(HomeCategoriesSuccess(categories)),
@@ -28,9 +29,13 @@ class HomeCubit extends Cubit<HomeState> {
     if (currentState is HomeProductsSuccess && currentState.hasReachedMax) {
       return;
     }
-    if (page == 1) {
-      emit(HomeLoading());
+    if (!hasMore) {
+      page = 1;
+      pageSize = 10;
+      hasMore = true;
+      emit(HomeProductsLoading());
     }
+
     final response = await _homeRepoImpl.getProducts(
       page: page,
       pageSize: pageSize,
@@ -38,8 +43,14 @@ class HomeCubit extends Cubit<HomeState> {
     response.when(
       success: (newProducts) {
         final bool hasReachedMax = newProducts.isEmpty;
-        _allProducts.addAll(newProducts);
-        page++;
+        if (newProducts.isEmpty) {
+          hasMore = false;
+        } else {
+          _allProducts.addAll(newProducts);
+          page++;
+          pageSize += pageSize;
+        }
+
         emit(
           HomeProductsSuccess(
             data: List.from(_allProducts),

@@ -6,7 +6,9 @@ sealed class HomeState {}
 
 class HomeInitial extends HomeState {}
 
-class HomeLoading extends HomeState {}
+class HomeCategoriesLoading extends HomeState {}
+
+class HomeProductsLoading extends HomeState {}
 
 class HomeCategoriesSuccess<T> extends HomeState {
   final T? data;

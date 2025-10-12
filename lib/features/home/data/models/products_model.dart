@@ -6,8 +6,14 @@ part 'products_model.g.dart';
 @JsonSerializable()
 class ProductList {
   final List<ProductItem>? items;
+  final int ? page;
+  final int ? pageSize;
+  final int ? totalCount;
+  final bool ? hasNextPage;
+  final bool ? hasPreviousPage;
 
-  const ProductList({this.items});
+
+  const ProductList(this.page, this.pageSize, this.totalCount, this.hasNextPage, this.hasPreviousPage, {this.items});
 
   factory ProductList.fromJson(Map<String, dynamic> json) =>
       _$ProductListFromJson(json);

@@ -10,10 +10,14 @@ class HomeBrandsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+            buildWhen: (previous, current) =>
+          current is HomeCategoriesLoading ||
+          current is HomeCategoriesSuccess ||
+          current is HomeCategoriesError,
       builder: (context, state) {
         switch (state) {
-          case HomeLoading():
-            return CircularProgressIndicator();
+          case HomeCategoriesLoading():
+            return CircularProgressIndicator(); 
 
           case HomeCategoriesSuccess(data: final categories):
             return HomeCategoriesSuccessBody(categories: categories);
