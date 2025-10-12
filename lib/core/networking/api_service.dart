@@ -6,7 +6,6 @@ import 'package:laza_app/features/login/data/models/login_response.dart';
 import 'package:laza_app/features/signup/data/models/sign_up_request_body.dart';
 import 'package:laza_app/features/signup/data/models/sign_up_response.dart';
 import 'package:laza_app/features/signup/data/models/verification/verification_request_body.dart';
-import 'package:laza_app/features/signup/data/models/verification/verification_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import 'api_constants.dart';
@@ -31,8 +30,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.productsEndpoint)
   Future<ProductList> getProducts(
-    @Header('page') int page,
-    @Header('pageSize') int pageSize,
-    
+    @Query('page') int page,
+    @Query('pageSize') int pageSize,
   );
 }

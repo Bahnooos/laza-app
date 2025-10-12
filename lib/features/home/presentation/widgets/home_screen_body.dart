@@ -15,29 +15,27 @@ class HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Column(
-            spacing: 16.h,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              16.verticalSpace,
-              const CustomeAppBar(hasWishlistIcon: false),
-              Text(AppStrings.hello, style: AppTextStyles.font28BlackBold),
-              Text(
-                AppStrings.welcomeToLaza,
-                style: AppTextStyles.font15GrayRegular,
-              ),
-              const HomeSearchBar(),
-              const HomeSectionHeader(title: 'Choose Brand'),
-              const HomeBrandsList(),
-              4.verticalSpace,
-               const HomeSectionHeader(title: 'New Arrival'),
-              const HomeProductGrid(),
-              // verticalSpace(32),
-            ],
-          ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
+          spacing: 16.h,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            16.verticalSpace,
+            const CustomeAppBar(hasWishlistIcon: false),
+            Text(AppStrings.hello, style: AppTextStyles.font28BlackBold),
+            Text(
+              AppStrings.welcomeToLaza,
+              style: AppTextStyles.font15GrayRegular,
+            ),
+            const HomeSearchBar(),
+            const HomeSectionHeader(title: 'Choose Brand'),
+            const HomeBrandsList(),
+            4.verticalSpace,
+             const HomeSectionHeader(title: 'New Arrival'),
+            Expanded(child: const HomeProductGrid()),
+            // verticalSpace(32),
+          ],
         ),
       ),
     );

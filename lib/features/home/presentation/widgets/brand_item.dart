@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laza_app/features/home/data/models/home_categories_model.dart';
 
 import '../../../../core/theme/app_color.dart';
@@ -23,25 +24,24 @@ class BrandItme extends StatelessWidget {
         children: [
           Container(
             width: 40.w,
-            height: 40.h,
+            height: 200.h,
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadiusGeometry.circular(8.r),
               ),
               color: AppColor.white,
             ),
-            child: Image.network(
+            child: SvgPicture.network(
               _categories.coverPictureUrl ?? '',
               width: 17.w,
               height: 22.h,
-              color: AppColor.darkGrayColor,
+              fit: BoxFit.scaleDown,
             ),
           ),
-          4.horizontalSpace,
-          Text(_categories.name??'', style: AppTextStyles.font15GrayRegular),
+          8.horizontalSpace,
+          Text(_categories.name ?? '', style: AppTextStyles.font15GrayRegular),
         ],
       ),
- 
     );
   }
 }

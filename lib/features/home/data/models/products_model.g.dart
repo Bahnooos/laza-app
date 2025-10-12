@@ -7,13 +7,25 @@ part of 'products_model.dart';
 // **************************************************************************
 
 ProductList _$ProductListFromJson(Map<String, dynamic> json) => ProductList(
+  (json['page'] as num?)?.toInt(),
+  (json['pageSize'] as num?)?.toInt(),
+  (json['totalCount'] as num?)?.toInt(),
+  json['hasNextPage'] as bool?,
+  json['hasPreviousPage'] as bool?,
   items: (json['items'] as List<dynamic>?)
       ?.map((e) => ProductItem.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 
 Map<String, dynamic> _$ProductListToJson(ProductList instance) =>
-    <String, dynamic>{'items': instance.items};
+    <String, dynamic>{
+      'items': instance.items,
+      'page': instance.page,
+      'pageSize': instance.pageSize,
+      'totalCount': instance.totalCount,
+      'hasNextPage': instance.hasNextPage,
+      'hasPreviousPage': instance.hasPreviousPage,
+    };
 
 ProductItem _$ProductItemFromJson(Map<String, dynamic> json) => ProductItem(
   id: json['id'] as String?,
